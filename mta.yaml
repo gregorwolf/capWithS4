@@ -1,0 +1,29 @@
+ID: capWithS4
+_schema-version: "2.1"
+version: 0.0.1
+modules:
+  - name: capWithS4-db
+    type: hdb
+    path: db
+    parameters:
+      memory: 256M
+      disk-quota: 256M
+    requires:
+      - name: capWithS4-hdi-container
+  - name: capWithS4-srv
+    type: nodejs
+    path: srv
+    parameters:
+      memory: 512M
+      disk-quota: 256M
+    provides:
+      - name: srv_api
+        properties:
+          url: ${default-url}
+    requires:
+      - name: capWithS4-hdi-container
+resources:
+  - name: capWithS4-hdi-container
+    type: com.sap.xs.hdi-container
+    properties:
+      hdi-container-name: ${service-name}
