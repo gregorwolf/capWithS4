@@ -14,7 +14,7 @@
 		"import_settings": {
         	"include_filter" : [ ],			
 			"import_columns": ["PURCHASEORDERID",
-			"PARTNER",
+			"PARTNERS_BUSINESSPARTNER",
 			"CURRENCY_CODE",
 			"GROSSAMOUNT",
 			"NETAMOUNT",
@@ -27,7 +27,7 @@
 		},
 		"column_mappings": {
 			"PURCHASEORDERID": 1,
-			"PARTNER": 7,
+			"PARTNERS_BUSINESSPARTNER": 7,
 			"CURRENCY_CODE": 8,
 			"GROSSAMOUNT": 9,
 			"NETAMOUNT": 10,

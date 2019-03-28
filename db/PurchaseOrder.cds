@@ -23,8 +23,8 @@ using { Currency, managed }        //> reusing common types
         key PURCHASEORDERID : Integer @(title: '{i18n>po_id}', Common.FieldControl: #Mandatory, Search.defaultSearchElement, Common.Label: '{i18n>po_id}');
             ITEMS           : association to many Items on ITEMS.POHeader = $self @(title: '{i18n>po_items}', Common: { Text: {$value: ITEMS.PRODUCT, "@UI.TextArrangement": #TextOnly }});
 
-            PARTNER         : BusinessKey @title: '{i18n>partner_id}';
-            PARTNERS: association to BusinessPartner on PARTNERS.BusinessPartner = PARTNER;
+        //    PARTNER         : BusinessKey @title: '{i18n>partner_id}';
+            PARTNERS: association to BusinessPartner;
             CURRENCY        : Currency;
             GROSSAMOUNT     : AmountT @( title: '{i18n>grossAmount}', Measures.ISOCurrency: currency);
             NETAMOUNT       : AmountT @( title: '{i18n>netAmount}', Measures.ISOCurrency: currency);
@@ -52,7 +52,7 @@ using { Currency, managed }        //> reusing common types
         select from Items
         {
             POHeader.PURCHASEORDERID,
-            POHeader.PARTNER,
+            POHeader.PARTNERS,
             PRODUCT,
             CURRENCY,
             GROSSAMOUNT,
