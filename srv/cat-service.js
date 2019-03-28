@@ -37,8 +37,6 @@ module.exports = (srv) => {
 	srv.after("READ", "POs", async(entities, req) => {
 		console.log(`Data: ${JSON.stringify(req.query)}`);
 		for (let each of entities) {
-/*		    each.PARTNERS = {
-				"BusinessPartner": "123"};	*/		
 			var bp = require("@sap/cloud-sdk-vdm-business-partner-service");
 			let businessPartner = await bp.BusinessPartner.requestBuilder()
 				.getByKey(each.PARTNERS_BusinessPartner)
