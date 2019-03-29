@@ -7,25 +7,34 @@
 
 module.exports = (srv) => {
 
+	function getSafe(fn, defaultVal) {
+		try {
+			return fn();
+		} catch (e) {
+			return defaultVal;
+		}
+	}
+
 	const cds = require("@sap/cds");
 	const xsenv = require("@sap/xsenv");
 	const services = xsenv.readCFServices();
-	const s4 = services.s4_sdk_backend || {
-		credentials: {}
-	};
-	const apiKey = s4.credentials.apiKey || "";
-	const s4Url = s4.credentials.url || "";
-
+	const s4 = getSafe(() => services.s4_sdk_backend);
+	const apiKey = getSafe(() => s4.credentials.apiKey, "");
+	const s4Url = getSafe(() => s4.credentials.url, "http://dummy.com");
 	const {
 		PO
 	} = cds.entities("opensap.PurchaseOrder");
 
 	srv.on("READ", "BusinessPartners", async(req) => {
 		try {
+			console.log(`Data: ${JSON.stringify(req.query)}`);
+			const top = getSafe(() => req.query.SELECT.limit.rows.val, 100);
+			const skip = getSafe(() => req.query.SELECT.limit.offset.val, 0);
 			var bp = require("@sap/cloud-sdk-vdm-business-partner-service");
 			let businessPartners = await bp.BusinessPartner.requestBuilder()
 				.getAll()
-				.top(100)
+				.top(top)
+				.skip(skip)
 				.withCustomHeaders({
 					apikey: apiKey
 				})
