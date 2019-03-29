@@ -16,6 +16,9 @@
         "express": "^4.16.4",
         "hdb": "^0.17.0"
     },
+    "devDependencies": {
+        "sqlite3": "^4.0.6"
+    },
     "scripts": {
         "start": "cds run",
         "build": "cds build/all --clean",
@@ -24,8 +27,14 @@
     "cds": {
         "requires": {
             "db": {
-                "kind": "hana",
-                "model": "db"
+                "kind": "sqlite",
+                "model": [
+                    "db",
+                    "srv"
+                ],
+                "credentials": {
+                    "database": "db/capWithS4.db"
+                }
             }
         }
     }

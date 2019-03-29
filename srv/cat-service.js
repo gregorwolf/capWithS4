@@ -9,6 +9,7 @@ const cds = require("@sap/cds");
 
 module.exports = (srv) => {
 
+	cds.connect();
 	const {
 		PO
 	} = cds.entities("opensap.PurchaseOrder");
