@@ -5,6 +5,7 @@
     "dependencies": {
         "@sap/cds": "^3.7.1",
         "express": "^4.16.4",
+        "@sap/xsenv": "latest",
 		"@sap/cloud-sdk-core": "^1.0.0",
 		"@sap/cloud-sdk-vdm-business-partner-service":  "^1.0.0",        
         "hdb": "^0.17.0"
