@@ -13,13 +13,16 @@ module.exports = (srv) => {
 		PO
 	} = cds.entities("opensap.PurchaseOrder");
 
+// If you want to use API Hub instead of local proxy uncomment the withCustomHeaders, fill in your API key and then use the sandbox.api.sap.com URl
 	srv.on("READ", "BusinessPartners", async(req) => {
 		var bp = require("@sap/cloud-sdk-vdm-business-partner-service");
 		let businessPartners = await bp.BusinessPartner.requestBuilder()
 			.getAll()
 			.top(100)
+		//	.withCustomHeaders({apikey: "<your api key here>"})
 			.execute({
 				url: "https://qgyx1mabatjzydhfs4mock-s4mocknode.hanapm.local.com:30033/"
+			//	url: "https://sandbox.api.sap.com/s4hanacloud/"
 			});
 		let data = [];
 		for (let each of businessPartners) {
