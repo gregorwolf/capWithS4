@@ -1,0 +1,2 @@
+// If you want to use API Hub instead of local proxy fill in your API key and then use the sandbox.api.sap.com URL
+xs cups s4_sdk_backend -p "{\"url\":\"https://sandbox.api.sap.com/s4hanacloud/\",\"apiKey\":\"<api-key>\",\"tags\":[\"s4api\"] }"
